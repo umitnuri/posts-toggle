@@ -1,0 +1,61 @@
+name: Android Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+env:
+  JAVA_VERSION: 17
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 📦 Install JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: 🏗️ Build, Lint, & Test
+        run: |
+          ./gradlew clean build
+  UITest:
+    needs: Build
+    runs-on: macos-13
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        api-level:
+          - 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 📦 Install JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: 🤖 Get AVD info
+        uses: ./.github/actions/get-avd-info
+        id: avd-info
+        with:
+          api-level: ${{ matrix.api-level }}
+
+      - name: 🏆 UI Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          arch: ${{ steps.avd-info.outputs.arch }}
+          target: ${{ steps.avd-info.outputs.target }}
+          script: ./gradlew connectedDebugAndroidTest
