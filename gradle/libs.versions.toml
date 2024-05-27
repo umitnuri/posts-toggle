@@ -1,16 +1,15 @@
 [versions]
-agp = "8.5.0-alpha08"
-kotlin = "1.9.23"
+agp = "8.6.0-alpha03"
+kotlin = "2.0.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
-lifecycleRuntimeKtx = "2.7.0"
+lifecycleRuntimeKtx = "2.8.0"
 activityCompose = "1.9.0"
 composeBom = "2024.05.00"
-androidComposeCompiler = "1.5.12"
 assertk = "0.28.1"
-mockk = '1.13.10'
+mockk = '1.13.11'
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,4 +34,5 @@ mockk-android-agent = { group = "io.mockk", name = "mockk-agent", version.ref = 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
