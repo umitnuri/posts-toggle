@@ -3,20 +3,14 @@ package biz.aydin.toggle.service
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import biz.aydin.toggle.domain.FeatureToggle
+import biz.aydin.toggle.domain.GetFeatureToggle
 import biz.aydin.toggle.domain.NewServiceToggle
 import org.junit.Test
 
 
 class GreetingsServiceToggleRemovalTest {
     private val greetingsService: GreetingsService = GreetingsService(
-        newServiceToggle = NewServiceToggle(
-            object : FeatureToggle {
-                override fun getToggle(key: String, default: Boolean): Boolean {
-                    return true
-                }
-            }
-        )
+        newServiceToggle = NewServiceToggle { _, _ -> true }
     )
 
     @Test

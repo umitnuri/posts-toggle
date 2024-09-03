@@ -1,11 +1,11 @@
 package biz.aydin.toggle.domain
 
 class NewGreetingServiceToggle(
-    val featureToggle: FeatureToggle
+    val getFeatureToggle: GetFeatureToggle
 ) {
     inline operator fun <R : Any> invoke(block: Toggle<R>.() -> Toggle<R>): R {
         return block(
-            if (featureToggle.getToggle("NEW_GREETING_SERVICE", false)) on() else off()
+            if (getFeatureToggle.invoke("NEW_GREETING_SERVICE", false)) on() else off()
         )()
     }
 }

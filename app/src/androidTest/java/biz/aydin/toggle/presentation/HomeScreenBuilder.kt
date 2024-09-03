@@ -3,16 +3,10 @@
 package biz.aydin.toggle.presentation
 
 import androidx.compose.runtime.Composable
-import biz.aydin.toggle.domain.FeatureToggle
+import biz.aydin.toggle.domain.GetFeatureToggle
 import biz.aydin.toggle.domain.NewUIToggle
 
-fun buildRemovedStateToggle(): NewUIToggle = NewUIToggle(
-    object : FeatureToggle {
-        override fun getToggle(key: String, default: Boolean): Boolean {
-            return true
-        }
-    }
-)
+fun buildRemovedStateToggle(): NewUIToggle = NewUIToggle { _, _ -> true }
 
 
 @Composable

@@ -12,13 +12,13 @@ import biz.aydin.toggle.domain.NewUIToggle
 import biz.aydin.toggle.presentation.GreetingsViewModel
 import biz.aydin.toggle.presentation.HomeScreen
 import biz.aydin.toggle.presentation.theme.ToggleTheme
-import biz.aydin.toggle.service.FeatureToggleService
+import biz.aydin.toggle.service.GetFeatureToggleService
 import biz.aydin.toggle.service.GreetingsService
 
 class MainActivity : ComponentActivity() {
-    private val newUIToggle = NewUIToggle(FeatureToggleService())
-    private val newDomainToggle = NewDomainToggle(FeatureToggleService())
-    private val newServiceToggle = NewServiceToggle(FeatureToggleService())
+    private val newUIToggle = NewUIToggle(GetFeatureToggleService())
+    private val newDomainToggle = NewDomainToggle(GetFeatureToggleService())
+    private val newServiceToggle = NewServiceToggle(GetFeatureToggleService())
     private val viewModel = GreetingsViewModel(
         getOldGreeting = GetOldGreetingUseCase(GreetingsService(newServiceToggle)),
         getNewGreeting = GetNewGreetingUseCase(GreetingsService(newServiceToggle)),

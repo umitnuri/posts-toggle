@@ -2,13 +2,11 @@ package biz.aydin.toggle.presentation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import biz.aydin.toggle.domain.FeatureToggle
+import biz.aydin.toggle.domain.GetFeatureToggle
 import biz.aydin.toggle.domain.NewUIToggle
 
 @Composable
@@ -56,13 +54,9 @@ fun HomeScreen(
     }
 }
 
-private val previewNewUIToggleOn = NewUIToggle(
-    object : FeatureToggle {
-        override fun getToggle(key: String, default: Boolean): Boolean {
-            return true
-        }
-    }
-)
+private val previewNewUIToggleOn = NewUIToggle { _, _ ->
+    true
+}
 
 @Preview
 @Composable
@@ -70,13 +64,7 @@ private fun HomeScreenPreviewNewUIToggleOn() {
     HomeScreen(message = "Message :)", newUIToggle = previewNewUIToggleOn)
 }
 
-private val previewNewUIToggleOff = NewUIToggle(
-    object : FeatureToggle {
-        override fun getToggle(key: String, default: Boolean): Boolean {
-            return false
-        }
-    }
-)
+private val previewNewUIToggleOff = NewUIToggle { _, _ -> false }
 
 @Preview
 @Composable
