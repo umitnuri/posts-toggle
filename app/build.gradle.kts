@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "biz.aydin.toggle"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "biz.aydin.toggle"
