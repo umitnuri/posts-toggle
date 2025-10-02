@@ -34,8 +34,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin {
+        jvmToolchain(17)
     }
     buildFeatures {
         compose = true
@@ -46,6 +46,20 @@ android {
                 "/META-INF/{AL2.0,LGPL2.1}",
                 "/META-INF/{LICENSE.md,LICENSE-notice.md}"
             )
+        }
+    }
+    testOptions {
+        managedDevices {
+            localDevices {
+                create("pixel9proapi34") {
+                    // Use device profiles you typically see in Android Studio.
+                    device = "Pixel 9 Pro"
+                    // Use only API levels 27 and higher.
+                    apiLevel = 34
+                    // To include Google services, use "google".
+                    systemImageSource = "aosp"
+                }
+            }
         }
     }
 }
